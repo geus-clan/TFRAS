@@ -1,11 +1,4 @@
-19082552589709715
-74HC4067BQ_118
-74LVCH8T245BQQ10J
-DHVQFN24 (SOT815-1)
-Integrated Circuit
-0
-25
-25
+19214031024749156
 Battery
 BatteryHolder_Bulgin_BX0036_1xC
 Bulgin Battery Holder, BX0036, Battery Type C (https://www.bulgin.com/products/pub/media/bulgin/data/Battery_holders.pdf)
@@ -2817,6 +2810,20 @@ Capacitor_SMD
 C_0603_1608Metric_Pad1.08x0.95mm_HandSolder
 Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator
 capacitor handsolder
+0
+2
+2
+Capacitor_SMD
+C_0603_1608Metric_fabdesignator
+Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator
+capacitor
+0
+2
+2
+Capacitor_SMD
+C_0603_1608Metric_fabdesignatorsmall
+Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator
+capacitor
 0
 2
 2
@@ -33844,6 +33851,13 @@ Surface mounted pin header SMD 2x40 2.54mm double row
 0
 80
 80
+Connector_PinHeader_2.54mm
+ScrewTerminal_1x12_P2.54mm_Vertical
+Through hole straight pin header, 1x12, 2.54mm pitch, single row
+Through hole pin header THT 1x12 2.54mm single row
+0
+12
+12
 Connector_PinSocket_1.00mm
 PinSocket_1x02_P1.00mm_Vertical
 Through hole straight socket strip, 1x02, 1.00mm pitch, single row (https://gct.co/files/drawings/bc065.pdf), script generated
@@ -58757,6 +58771,510 @@ net tie
 0
 4
 4
+New folder
+2p3t_switch
+2x-dip-switch, Piano, row spacing 7.62 mm (300 mils)
+DIP Switch Piano 7.62mm 300mil
+0
+6
+6
+New folder
+744C083_R_Array_Convex_4x1206
+Chip Resistor Network, ROHM MNR34 (see mnr_g.pdf)
+resistor array
+0
+8
+8
+New folder
+ACP_trimmer
+Potentiometer, vertically mounted, Omeg PC16PU, Omeg PC16PU, Omeg PC16PU, Vishay/Spectrol 248GJ/249GJ Single, Vishay/Spectrol 248GJ/249GJ Single, Vishay/Spectrol 248GJ/249GJ Single, Vishay/Spectrol 248GH/249GH Single, Vishay/Spectrol 148/149 Single, Vishay/Spectrol 148/149 Single, Vishay/Spectrol 148/149 Single, Vishay/Spectrol 148A/149A Single with mounting plates, Vishay/Spectrol 148/149 Double, Vishay/Spectrol 148A/149A Double with mounting plates, Piher PC-16 Single, Piher PC-16 Single, Piher PC-16 Single, Piher PC-16SV Single, Piher PC-16 Double, Piher PC-16 Triple, Piher T16H Single, Piher T16L Single, Piher T16H Double, Alps RK163 Single, Alps RK163 Double, Alps RK097 Single, Alps RK097 Double, Bourns PTV09A-2 Single with mounting sleve Single, Bourns PTV09A-1 with mounting sleve Single, Bourns PRS11S Single, Alps RK09K Single with mounting sleve Single, Alps RK09K with mounting sleve Single, Alps RK09L Single, Alps RK09L Single, Alps RK09L Double, Alps RK09L Double, Alps RK09Y Single, Bourns 3339S Single, Bourns 3339S Single, Bourns 3339P Single, Bourns 3339H Single, Vishay T7YA Single, Suntan TSR-3386H Single, Suntan TSR-3386H Single, Suntan TSR-3386P Single, Vishay T73XX Single, Vishay T73XX Single, Vishay T73YP Single, Piher PT-6h Single, Piher PT-6v Single, Piher PT-6v Single, Piher PT-10h2.5 Single, Piher PT-10h5 Single, Piher PT-101h3.8 Single, Piher PT-10v10 Single, Piher PT-10v10 Single, Piher PT-10v5 Single, Piher PT-15h5 Single, Piher PT-15h2.5 Single, Piher PT-15B Single, Piher PT-15hc5 Single, Piher PT-15v12.5 Single, Piher PT-15v12.5 Single, Piher PT-15v15 Single, Piher PT-15v15 Single, ACP CA6h Single, ACP CA6v Single, ACP CA6v Single, ACP CA6VSMD Single, ACP CA6VSMD Single, ACP CA9h2.5 Single, ACP CA9h3.8 Single, ACP CA9h5 Single, ACP CA9V Single, ACP CA9V Single, ACP CA9VSMD Single, ACP CA9VSMD Single, ACP CA14h2.5 Single, ACP CA14h4 Single, ACP CA14h5 Single, http://www.acptechnologies.com/wp-content/uploads/2016/12/ACP-CAT%C3%81LOGO-ENTERO-2016.pdf
+Potentiometer vertical  Omeg PC16PU  Omeg PC16PU  Omeg PC16PU  Vishay/Spectrol 248GJ/249GJ Single  Vishay/Spectrol 248GJ/249GJ Single  Vishay/Spectrol 248GJ/249GJ Single  Vishay/Spectrol 248GH/249GH Single  Vishay/Spectrol 148/149 Single  Vishay/Spectrol 148/149 Single  Vishay/Spectrol 148/149 Single  Vishay/Spectrol 148A/149A Single with mounting plates  Vishay/Spectrol 148/149 Double  Vishay/Spectrol 148A/149A Double with mounting plates  Piher PC-16 Single  Piher PC-16 Single  Piher PC-16 Single  Piher PC-16SV Single  Piher PC-16 Double  Piher PC-16 Triple  Piher T16H Single  Piher T16L Single  Piher T16H Double  Alps RK163 Single  Alps RK163 Double  Alps RK097 Single  Alps RK097 Double  Bourns PTV09A-2 Single with mounting sleve Single  Bourns PTV09A-1 with mounting sleve Single  Bourns PRS11S Single  Alps RK09K Single with mounting sleve Single  Alps RK09K with mounting sleve Single  Alps RK09L Single  Alps RK09L Single  Alps RK09L Double  Alps RK09L Double  Alps RK09Y Single  Bourns 3339S Single  Bourns 3339S Single  Bourns 3339P Single  Bourns 3339H Single  Vishay T7YA Single  Suntan TSR-3386H Single  Suntan TSR-3386H Single  Suntan TSR-3386P Single  Vishay T73XX Single  Vishay T73XX Single  Vishay T73YP Single  Piher PT-6h Single  Piher PT-6v Single  Piher PT-6v Single  Piher PT-10h2.5 Single  Piher PT-10h5 Single  Piher PT-101h3.8 Single  Piher PT-10v10 Single  Piher PT-10v10 Single  Piher PT-10v5 Single  Piher PT-15h5 Single  Piher PT-15h2.5 Single  Piher PT-15B Single  Piher PT-15hc5 Single  Piher PT-15v12.5 Single  Piher PT-15v12.5 Single  Piher PT-15v15 Single  Piher PT-15v15 Single  ACP CA6h Single  ACP CA6v Single  ACP CA6v Single  ACP CA6VSMD Single  ACP CA6VSMD Single  ACP CA9h2.5 Single  ACP CA9h3.8 Single  ACP CA9h5 Single  ACP CA9V Single  ACP CA9V Single  ACP CA9VSMD Single  ACP CA9VSMD Single  ACP CA14h2.5 Single  ACP CA14h4 Single  ACP CA14h5 Single
+0
+3
+3
+New folder
+Buzzer_PS1240P02CT3
+
+
+0
+2
+2
+New folder
+CP_bigpads
+CP, Radial series, Radial, pin pitch=3.50mm, , diameter=8mm, Electrolytic Capacitor
+CP Radial series Radial pin pitch 3.50mm  diameter 8mm Electrolytic Capacitor
+0
+2
+2
+New folder
+CP_small
+CP, Radial series, Radial, pin pitch=3.50mm, , diameter=8mm, Electrolytic Capacitor
+CP Radial series Radial pin pitch 3.50mm  diameter 8mm Electrolytic Capacitor
+0
+2
+2
+New folder
+C_1206_HandSoldering
+Capacitor SMD 1206, hand soldering
+capacitor 1206
+0
+2
+2
+New folder
+C_1206_HandSoldering_Invisible-reference
+Capacitor SMD 1206, hand soldering
+capacitor 1206
+0
+2
+2
+New folder
+C_1206_HandSoldering_decouple
+Capacitor SMD 1206, hand soldering
+capacitor 1206
+0
+2
+2
+New folder
+C_1206_HandSoldering_silkscreenlabel
+Capacitor SMD 1206, hand soldering
+capacitor 1206
+0
+2
+2
+New folder
+C_Disc_bigpads
+C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=7.5*2.5mm^2, Capacitor, http://www.vishay.com/docs/28535/vy2series.pdf
+C Disc series Radial pin pitch 5.00mm  diameter 7.5mm width 2.5mm Capacitor
+0
+2
+2
+New folder
+D_SOD-123
+SOD-123
+SOD-123
+0
+2
+2
+New folder
+D_bigpads
+D, A-405 series, Axial, Horizontal, pin pitch=7.62mm, , length*diameter=5.2*2.7mm^2, , http://www.diodes.com/_files/packages/A-405.pdf
+D A-405 series Axial Horizontal pin pitch 7.62mm  length 5.2mm diameter 2.7mm
+0
+2
+2
+New folder
+LED_D5.0mm_bigpads
+LED, diameter 5.0mm, 2 pins, http://cdn-reichelt.de/documents/datenblatt/A500/LL-504BC2E-009.pdf
+LED diameter 5.0mm 2 pins
+0
+2
+2
+New folder
+LL3301NF065QG_switch
+
+
+0
+4
+4
+New folder
+LL3301NF065QG_switch-tall
+
+
+0
+4
+4
+New folder
+MHS122K
+
+
+0
+5
+3
+New folder
+PinHeader_2x08_P2.54mm_Vertical
+Through hole straight pin header, 2x08, 2.54mm pitch, double rows
+Through hole pin header THT 2x08 2.54mm double row
+0
+16
+16
+New folder
+Pin_Header_Straight_1x01_Pitch2.54mm_Invisible-reference
+Through hole straight pin header, 1x01, 2.54mm pitch, single row
+Through hole pin header THT 1x01 2.54mm single row
+0
+1
+1
+New folder
+Potentiometer_Trimmer_Bourns_3339S_Vertical
+Potentiometer, vertically mounted, Omeg PC16PU, Omeg PC16PU, Omeg PC16PU, Vishay/Spectrol 248GJ/249GJ Single, Vishay/Spectrol 248GJ/249GJ Single, Vishay/Spectrol 248GJ/249GJ Single, Vishay/Spectrol 248GH/249GH Single, Vishay/Spectrol 148/149 Single, Vishay/Spectrol 148/149 Single, Vishay/Spectrol 148/149 Single, Vishay/Spectrol 148A/149A Single with mounting plates, Vishay/Spectrol 148/149 Double, Vishay/Spectrol 148A/149A Double with mounting plates, Piher PC-16 Single, Piher PC-16 Single, Piher PC-16 Single, Piher PC-16SV Single, Piher PC-16 Double, Piher PC-16 Triple, Piher T16H Single, Piher T16L Single, Piher T16H Double, Alps RK163 Single, Alps RK163 Double, Alps RK097 Single, Alps RK097 Double, Bourns PTV09A-2 Single with mounting sleve Single, Bourns PTV09A-1 with mounting sleve Single, Bourns PRS11S Single, Alps RK09K Single with mounting sleve Single, Alps RK09K with mounting sleve Single, Alps RK09L Single, Alps RK09L Single, Alps RK09L Double, Alps RK09L Double, Alps RK09Y Single, Bourns 3339S Single, http://www.alps.com/prod/info/E/HTML/Potentiometer/RotaryPotentiometers/RK09Y11/RK09Y11L0001.html
+Potentiometer vertical  Omeg PC16PU  Omeg PC16PU  Omeg PC16PU  Vishay/Spectrol 248GJ/249GJ Single  Vishay/Spectrol 248GJ/249GJ Single  Vishay/Spectrol 248GJ/249GJ Single  Vishay/Spectrol 248GH/249GH Single  Vishay/Spectrol 148/149 Single  Vishay/Spectrol 148/149 Single  Vishay/Spectrol 148/149 Single  Vishay/Spectrol 148A/149A Single with mounting plates  Vishay/Spectrol 148/149 Double  Vishay/Spectrol 148A/149A Double with mounting plates  Piher PC-16 Single  Piher PC-16 Single  Piher PC-16 Single  Piher PC-16SV Single  Piher PC-16 Double  Piher PC-16 Triple  Piher T16H Single  Piher T16L Single  Piher T16H Double  Alps RK163 Single  Alps RK163 Double  Alps RK097 Single  Alps RK097 Double  Bourns PTV09A-2 Single with mounting sleve Single  Bourns PTV09A-1 with mounting sleve Single  Bourns PRS11S Single  Alps RK09K Single with mounting sleve Single  Alps RK09K with mounting sleve Single  Alps RK09L Single  Alps RK09L Single  Alps RK09L Double  Alps RK09L Double  Alps RK09Y Single  Bourns 3339S Single
+0
+3
+3
+New folder
+Potentiometer_WirePads_largePads
+Potentiometer, Wire Pads only, RevA, 30 July 2010,
+Potentiometer Wire Pads only RevA 30 July 2010 
+0
+3
+3
+New folder
+RD901F-ALPHA-POT
+
+
+0
+5
+3
+New folder
+RD901F-ALPHA-POT_bigpads
+
+
+0
+5
+3
+New folder
+RD901F-ALPHA-POT_ovalpads
+
+
+0
+5
+3
+New folder
+R_0805_HandSolder_silksreen
+Resistor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC_7351 nominal with elongated pad for handsoldering. (Body size source: https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing), generated with kicad-footprint-generator
+resistor handsolder
+0
+2
+2
+New folder
+R_0805__HandSolder
+Resistor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC_7351 nominal with elongated pad for handsoldering. (Body size source: https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing), generated with kicad-footprint-generator
+resistor handsolder
+0
+2
+2
+New folder
+R_1206_HandSoldering_silkskreenlabel
+Resistor SMD 1206, hand soldering
+resistor 1206
+0
+2
+2
+New folder
+Resistor_bigpad
+Resistor, Axial_DIN0207 series, Axial, Horizontal, pin pitch=7.62mm, 0.25W = 1/4W, length*diameter=6.3*2.5mm^2, http://cdn-reichelt.de/documents/datenblatt/B400/1_4W%23YAG.pdf
+Resistor Axial_DIN0207 series Axial Horizontal pin pitch 7.62mm 0.25W = 1/4W length 6.3mm diameter 2.5mm
+0
+2
+2
+New folder
+Slider-Alpha_RA6020F
+
+
+0
+3
+3
+New folder
+Slider-Alpha_RA6020F_partial
+
+
+0
+2
+2
+New folder
+THONKICONN
+
+
+0
+4
+3
+New folder
+THONKICONN_bigpads
+
+
+0
+3
+3
+New folder
+TL-777482-LED_Slider
+
+
+0
+6
+6
+New folder
+TO-92_bigpads
+TO-92 leads molded, wide, oval pads, drill 0.8mm (see NXP sot054_po.pdf)
+to-92 sc-43 sc-43a sot54 PA33 transistor
+0
+3
+3
+New folder
+Teensy40
+
+
+0
+34
+34
+New folder
+Untitled
+
+
+0
+0
+0
+New folder
+banana
+
+
+0
+2
+1
+New folder
+battery_holder_BAT-HLD-001-xx-OTL
+
+
+0
+3
+2
+New folder
+booktoneswitch
+
+
+0
+6
+6
+New folder
+channel_layout
+
+
+0
+0
+0
+New folder
+channelpcb_layout
+
+
+0
+0
+0
+New folder
+cvrow_layout
+
+
+0
+0
+0
+New folder
+drillhole_2mm
+
+
+0
+1
+1
+New folder
+drillhole_3mm
+
+
+0
+1
+1
+New folder
+envs1
+
+
+0
+0
+0
+New folder
+ferrite_bead_handsolder-1206
+Resistor SMD 1206, hand soldering
+resistor 1206
+0
+2
+2
+New folder
+fishing
+
+
+0
+0
+0
+New folder
+hand
+
+
+0
+0
+0
+New folder
+jumper
+
+
+0
+1
+1
+New folder
+noise
+
+
+0
+0
+0
+New folder
+orchid_small
+
+
+0
+0
+0
+New folder
+pc_screw_terminals
+
+
+0
+2
+1
+New folder
+polyfuse_0ZRP
+
+
+0
+2
+2
+New folder
+psu
+
+
+0
+0
+0
+New folder
+rhf
+
+
+0
+0
+0
+New folder
+shnoise
+
+
+0
+0
+0
+New folder
+slider_bigpads
+
+
+0
+7
+4
+New folder
+sp3t
+
+
+0
+6
+5
+New folder
+spdt_OS102011MS2QN1
+
+
+0
+5
+4
+New folder
+spdt_bigpads
+
+
+0
+3
+3
+New folder
+star_large
+
+
+0
+0
+0
+New folder
+star_medium
+
+
+0
+0
+0
+New folder
+star_small
+
+
+0
+0
+0
+New folder
+star_vco_silk
+
+
+0
+0
+0
+New folder
+star_vco_silk2
+
+
+0
+0
+0
+New folder
+vca
+
+
+0
+0
+0
+New folder
+vcahand
+
+
+0
+0
+0
+New folder
+vcas
+
+
+0
+0
+0
+New folder
+vcf_select
+
+
+0
+3
+3
+New folder
+vcfs
+
+
+0
+0
+0
+New folder
+vcfs_wide
+
+
+0
+0
+0
+New folder
+vco_panel
+
+
+0
+0
+0
 OptoDevice
 ADNS-9800
 Laser Gaming Sensor ADNS-9800
@@ -74395,6 +74913,62 @@ WiFi IEEE802.11 b/g/n
 0
 44
 44
+Rare flowers
+SOT763-1(DHVQFN16)
+
+
+0
+16
+16
+Rare flowers
+TFRAS
+
+
+0
+0
+0
+Rare flowers
+bnk
+
+
+0
+0
+0
+Rare flowers
+ferrite_bead_1206
+Resistor SMD 1206, hand soldering
+resistor 1206
+0
+2
+2
+Rare flowers
+living master
+
+
+0
+0
+0
+Rare flowers
+paintre logo
+
+
+0
+0
+0
+Rare flowers
+paintre v1
+
+
+0
+0
+0
+Rare flowers
+rack3proto
+
+
+0
+0
+0
 Relay_SMD
 Relay_DPDT_AXICOM_IMSeries_JLeg
 http://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Specification+Or+Standard%7F108-98001%7FW5%7Fpdf%7FEnglish%7FENG_SS_108-98001_W5.pdf
@@ -75120,6 +75694,20 @@ Resistor_SMD
 R_0603_1608Metric_Pad0.98x0.95mm_HandSolder
 Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator
 resistor handsolder
+0
+2
+2
+Resistor_SMD
+R_0603_1608Metric_fabdesignator
+Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator
+resistor
+0
+2
+2
+Resistor_SMD
+R_0603_1608Metric_fabdesignatorsmall
+Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator
+resistor
 0
 2
 2
