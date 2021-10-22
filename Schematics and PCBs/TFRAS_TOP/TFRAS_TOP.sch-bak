@@ -18,10 +18,11 @@ L Device:R R1
 U 1 1 5F6232A8
 P 3650 6150
 F 0 "R1" H 3720 6196 50  0000 L CNN
-F 1 "10k" H 3720 6105 50  0000 L CNN
+F 1 "100k" H 3720 6105 50  0000 L CNN
 F 2 "Resistor_SMD:R_0402_1005Metric" V 3580 6150 50  0001 C CNN
 F 3 "~" H 3650 6150 50  0001 C CNN
-F 4 "C25744" H 3650 6150 50  0001 C CNN "JLC part number"
+F 4 "" H 3650 6150 50  0001 C CNN "JLC part number"
+F 5 "301010456	" H 3650 6150 50  0001 C CNN "seeed sku"
 	1    3650 6150
 	1    0    0    -1  
 $EndComp
@@ -30,11 +31,12 @@ L Device:Thermistor_NTC TH1
 U 1 1 5F624019
 P 3650 6550
 F 0 "TH1" H 3748 6596 50  0000 L CNN
-F 1 "Thermistor_NTC_10K" H 3748 6505 50  0000 L CNN
-F 2 "Resistor_SMD:R_0402_1005Metric" H 3650 6600 50  0001 C CNN
+F 1 "Thermistor_NTC_100K" H 3748 6505 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" H 3650 6600 50  0001 C CNN
 F 3 "~" H 3650 6600 50  0001 C CNN
-F 4 "667-ERT-J0EG103JA" H 3650 6550 50  0001 C CNN "Mouser part number"
-F 5 "ERT-J0EG103JA" H 3650 6550 50  0001 C CNN "Manufacturer part number"
+F 4 "" H 3650 6550 50  0001 C CNN "Mouser part number"
+F 5 "" H 3650 6550 50  0001 C CNN "Manufacturer part number"
+F 6 "314110001" H 3650 6550 50  0001 C CNN "seeed sku"
 	1    3650 6550
 	1    0    0    -1  
 $EndComp
@@ -58,10 +60,11 @@ L Device:C C2
 U 1 1 5F62E8E1
 P 2100 1600
 F 0 "C2" H 2215 1646 50  0000 L CNN
-F 1 "100uF tantalum" H 2215 1555 50  0000 L CNN
+F 1 "100uF" H 2215 1555 50  0000 L CNN
 F 2 "Capacitor_SMD:C_1206_3216Metric" H 2138 1450 50  0001 C CNN
 F 3 "~" H 2100 1600 50  0001 C CNN
-F 4 "C16133" H 2100 1600 50  0001 C CNN "JLC part number"
+F 4 "" H 2100 1600 50  0001 C CNN "JLC part number"
+F 5 "302010183" H 2100 1600 50  0001 C CNN "seeed sku"
 	1    2100 1600
 	1    0    0    -1  
 $EndComp
@@ -76,10 +79,11 @@ L Device:C C1
 U 1 1 5F6300E5
 P 1050 1600
 F 0 "C1" H 800 1600 50  0000 L CNN
-F 1 "10uF tant" H 700 1500 50  0000 L CNN
+F 1 "10uF" H 700 1500 50  0000 L CNN
 F 2 "Capacitor_SMD:C_1206_3216Metric" H 1088 1450 50  0001 C CNN
 F 3 "~" H 1050 1600 50  0001 C CNN
-F 4 "C7171" H 1050 1600 50  0001 C CNN "JLC part number"
+F 4 "" H 1050 1600 50  0001 C CNN "JLC part number"
+F 5 "302010181" H 1050 1600 50  0001 C CNN "seeed sku"
 	1    1050 1600
 	1    0    0    -1  
 $EndComp
@@ -143,6 +147,7 @@ F 1 "100nF" H 4165 905 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0402_1005Metric" H 4088 800 50  0001 C CNN
 F 3 "~" H 4050 950 50  0001 C CNN
 F 4 "C1525" H 4050 950 50  0001 C CNN "JLC part number"
+F 5 "302010004" H 4050 950 50  0001 C CNN "seeed sku"
 	1    4050 950 
 	-1   0    0    1   
 $EndComp
@@ -168,10 +173,11 @@ L Device:R R3
 U 1 1 5F7407D4
 P 5200 1300
 F 0 "R3" H 5270 1346 50  0000 L CNN
-F 1 "10" H 5270 1255 50  0000 L CNN
+F 1 "13" H 5270 1255 50  0000 L CNN
 F 2 "Resistor_SMD:R_1206_3216Metric" V 5130 1300 50  0001 C CNN
 F 3 "~" H 5200 1300 50  0001 C CNN
 F 4 "C17903" H 5200 1300 50  0001 C CNN "JLC part number"
+F 5 "301010405" H 5200 1300 50  0001 C CNN "seeed sku"
 	1    5200 1300
 	0    1    1    0   
 $EndComp
@@ -180,10 +186,11 @@ L Device:R R4
 U 1 1 5F741121
 P 5200 1500
 F 0 "R4" H 5270 1546 50  0000 L CNN
-F 1 "10" H 5270 1455 50  0000 L CNN
+F 1 "13" H 5270 1455 50  0000 L CNN
 F 2 "Resistor_SMD:R_1206_3216Metric" V 5130 1500 50  0001 C CNN
 F 3 "~" H 5200 1500 50  0001 C CNN
 F 4 "C17903" H 5200 1500 50  0001 C CNN "JLC part number"
+F 5 "301010405" H 5200 1500 50  0001 C CNN "seeed sku"
 	1    5200 1500
 	0    1    1    0   
 $EndComp
@@ -388,6 +395,7 @@ F 1 "100nF" H 5150 3450 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0402_1005Metric" H 5538 3400 50  0001 C CNN
 F 3 "~" H 5500 3550 50  0001 C CNN
 F 4 "C1525" H 5500 3550 50  0001 C CNN "JLC part number"
+F 5 "302010004" H 5500 3550 50  0001 C CNN "seeed sku"
 	1    5500 3550
 	-1   0    0    1   
 $EndComp
@@ -411,6 +419,7 @@ F 1 "100nF" H 4650 3450 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0402_1005Metric" H 5038 3400 50  0001 C CNN
 F 3 "~" H 5000 3550 50  0001 C CNN
 F 4 "C1525" H 5000 3550 50  0001 C CNN "JLC part number"
+F 5 "302010004" H 5000 3550 50  0001 C CNN "seeed sku"
 	1    5000 3550
 	-1   0    0    1   
 $EndComp
@@ -451,6 +460,7 @@ F 1 "10uH" V 5849 3700 50  0000 C CNN
 F 2 "Inductor_SMD:L_0603_1608Metric" H 5750 3700 50  0001 C CNN
 F 3 "~" H 5750 3700 50  0001 C CNN
 F 4 "C1035" H 5750 3700 50  0001 C CNN "JLC part number"
+F 5 "303010026" H 5750 3700 50  0001 C CNN "seeed sku"
 	1    5750 3700
 	0    1    1    0   
 $EndComp
@@ -465,6 +475,7 @@ F 1 "ATmega4809-A" H 5400 3670 50  0000 C CNN
 F 2 "Package_QFP:TQFP-48_7x7mm_P0.5mm" H 5400 5250 50  0001 C CIN
 F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/40002016A.pdf" H 5400 5250 50  0001 C CNN
 F 4 "C189475" H 5400 5250 50  0001 C CNN "JLC part number"
+F 5 "ATMEGA4809-AFR" H 5400 5250 50  0001 C CNN "seeed sku"
 	1    5400 5250
 	1    0    0    -1  
 $EndComp
@@ -488,6 +499,7 @@ F 1 "100nF" H 4250 3450 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0402_1005Metric" H 4638 3400 50  0001 C CNN
 F 3 "~" H 4600 3550 50  0001 C CNN
 F 4 "C1525" H 4600 3550 50  0001 C CNN "JLC part number"
+F 5 "302010004" H 4600 3550 50  0001 C CNN "seeed sku"
 	1    4600 3550
 	-1   0    0    1   
 $EndComp
@@ -505,9 +517,10 @@ U 1 1 6164BACF
 P 1050 3650
 F 0 "R2" H 850 3700 50  0000 L CNN
 F 1 "10k" H 800 3600 50  0000 L CNN
-F 2 "Resistor_SMD:R_0402_1005Metric" V 980 3650 50  0001 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" V 980 3650 50  0001 C CNN
 F 3 "~" H 1050 3650 50  0001 C CNN
-F 4 "C25744" H 1050 3650 50  0001 C CNN "JLC part number"
+F 4 "" H 1050 3650 50  0001 C CNN "JLC part number"
+F 5 "301010361" H 1050 3650 50  0001 C CNN "seeed sku"
 	1    1050 3650
 	0    1    1    0   
 $EndComp
@@ -563,7 +576,7 @@ L 74xx:74HCT4051 U4
 U 1 1 61868BCE
 P 1500 3950
 F 0 "U4" H 1650 4550 50  0000 C CNN
-F 1 "74HCT4051" H 1800 4450 50  0000 C CNN
+F 1 "74HC4051BQ" H 1800 4450 50  0000 C CNN
 F 2 "Rare flowers:SOT763-1(DHVQFN16)" H 1500 3550 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/cd74hct4051.pdf" H 1500 3550 50  0001 C CNN
 F 4 "C547696" H 1500 3950 50  0001 C CNN "JLC part number"
@@ -579,6 +592,7 @@ F 1 "100nF" H 1850 3100 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0402_1005Metric" H 2238 3050 50  0001 C CNN
 F 3 "~" H 2200 3200 50  0001 C CNN
 F 4 "C1525" H 2200 3200 50  0001 C CNN "JLC part number"
+F 5 "302010004" H 2200 3200 50  0001 C CNN "seeed sku"
 	1    2200 3200
 	-1   0    0    1   
 $EndComp
@@ -672,24 +686,8 @@ Text GLabel 4800 4750 0    50   Input ~ 0
 C
 Text GLabel 4800 4450 0    50   Input ~ 0
 A_TOP
-$Comp
-L Device:R R5
-U 1 1 6191482D
-P 4100 4700
-F 0 "R5" H 4170 4746 50  0000 L CNN
-F 1 "10k" H 4170 4655 50  0000 L CNN
-F 2 "Resistor_SMD:R_0402_1005Metric" V 4030 4700 50  0001 C CNN
-F 3 "~" H 4100 4700 50  0001 C CNN
-F 4 "C25744" H 4100 4700 50  0001 C CNN "JLC part number"
-	1    4100 4700
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	4600 3700 4100 3700
-Connection ~ 4600 3700
 Wire Wire Line
 	4100 4850 4800 4850
-Connection ~ 4100 4850
 $Comp
 L power:GND #PWR0120
 U 1 1 6193FD5D
@@ -701,20 +699,6 @@ F 3 "" H 1700 10000 50  0001 C CNN
 	1    1700 10000
 	-1   0    0    1   
 $EndComp
-$Comp
-L Device:R R6
-U 1 1 61942739
-P 4100 4400
-F 0 "R6" H 4170 4446 50  0000 L CNN
-F 1 "10k" H 4170 4355 50  0000 L CNN
-F 2 "Resistor_SMD:R_0402_1005Metric" V 4030 4400 50  0001 C CNN
-F 3 "~" H 4100 4400 50  0001 C CNN
-F 4 "C25744" H 4100 4400 50  0001 C CNN "JLC part number"
-	1    4100 4400
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	4100 4250 4100 3700
 $Comp
 L power:GND #PWR01
 U 1 1 6194D3EF
@@ -732,9 +716,10 @@ U 1 1 6194D3F9
 P 1050 5500
 F 0 "R7" H 850 5550 50  0000 L CNN
 F 1 "10k" H 800 5450 50  0000 L CNN
-F 2 "Resistor_SMD:R_0402_1005Metric" V 980 5500 50  0001 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" V 980 5500 50  0001 C CNN
 F 3 "~" H 1050 5500 50  0001 C CNN
-F 4 "C25744" H 1050 5500 50  0001 C CNN "JLC part number"
+F 4 "" H 1050 5500 50  0001 C CNN "JLC part number"
+F 5 "301010361" H 1050 5500 50  0001 C CNN "seeed sku"
 	1    1050 5500
 	0    1    1    0   
 $EndComp
@@ -745,7 +730,7 @@ L 74xx:74HCT4051 U5
 U 1 1 6194D404
 P 1500 5800
 F 0 "U5" H 1650 6400 50  0000 C CNN
-F 1 "74HCT4051" H 1800 6300 50  0000 C CNN
+F 1 "74HC4051BQ" H 1800 6300 50  0000 C CNN
 F 2 "Rare flowers:SOT763-1(DHVQFN16)" H 1500 5400 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/cd74hct4051.pdf" H 1500 5400 50  0001 C CNN
 F 4 "C547696" H 1500 5800 50  0001 C CNN "JLC part number"
@@ -761,6 +746,7 @@ F 1 "100nF" H 1850 4950 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0402_1005Metric" H 2238 4900 50  0001 C CNN
 F 3 "~" H 2200 5050 50  0001 C CNN
 F 4 "C1525" H 2200 5050 50  0001 C CNN "JLC part number"
+F 5 "302010004" H 2200 5050 50  0001 C CNN "seeed sku"
 	1    2200 5050
 	-1   0    0    1   
 $EndComp
@@ -901,6 +887,7 @@ F 1 "AMS1117-3.3" H 1550 1601 50  0000 C CNN
 F 2 "Package_TO_SOT_SMD:SOT-223-3_TabPin2" H 1550 1650 50  0001 C CNN
 F 3 "http://www.advanced-monolithic.com/pdf/ds1117.pdf" H 1650 1200 50  0001 C CNN
 F 4 "C6186" H 1550 1450 50  0001 C CNN "JLC part number"
+F 5 "AMS1117-3.3	" H 1550 1450 50  0001 C CNN "seeed sku"
 	1    1550 1450
 	1    0    0    -1  
 $EndComp
@@ -940,18 +927,6 @@ F 3 "" H 4550 1000 50  0001 C CNN
 	1    4550 1000
 	1    0    0    -1  
 $EndComp
-$Comp
-L Interface_UART:SN65HVD75 U3
-U 1 1 6191B80C
-P 4550 1600
-F 0 "U3" H 4650 2300 50  0000 C CNN
-F 1 "SN65HVD75" H 4800 2200 50  0000 C CNN
-F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 4550 700 50  0001 C CNN
-F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/285012fe.pdf" H 4050 1700 50  0001 C CNN
-F 4 "C57928" H 4550 1600 50  0001 C CNN "JLC part number"
-	1    4550 1600
-	1    0    0    -1  
-$EndComp
 Connection ~ 4550 1000
 Wire Wire Line
 	5350 1500 5600 1500
@@ -966,7 +941,37 @@ Wire Wire Line
 Text Notes 1900 2000 0    50   ~ 0
 output cap: larger the better \n(check LM1117 datasheet p.16)
 Text Notes 5100 1950 0    50   ~ 0
-.230W load at 20Mbps, 50% duty cycle test conditions (datasheet).\nresistors should be absolutely minimum rated to 1/4W\n(20Mbps is faster than we will be communicating, and we’re nowhere near 50% duty cycle for serial coms).
+designed for SN65HVD75:\n.230W load at 20Mbps, 50% duty cycle test conditions (datasheet).\nresistors should be absolutely minimum rated to 1/4W\n(20Mbps is faster than we will be communicating, and we’re nowhere near 50% duty cycle for serial coms).
 Text Notes 4100 2700 0    50   ~ 0
 JLC actually stocks a smaller housing… but\ni already laid it out for SOIC-8, which makes\ntesting and troubleshooting easier anyway.
+Text Notes 6350 1450 0    50   ~ 0
+these are 10 ohms in the datasheet, but seeed opl has 13 ohms at 1/4W.
+$Comp
+L Interface_UART:SN65HVD75 U3
+U 1 1 6191B80C
+P 4550 1600
+F 0 "U3" H 4650 2300 50  0000 C CNN
+F 1 "MAX3471" H 4800 2200 50  0000 C CNN
+F 2 "Package_SO:MSOP-8_3x3mm_P0.65mm" H 4550 700 50  0001 C CNN
+F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/285012fe.pdf" H 4050 1700 50  0001 C CNN
+F 4 "" H 4550 1600 50  0001 C CNN "JLC part number"
+F 5 "MAX3471EUA" H 4550 1600 50  0001 C CNN "seeed sku"
+	1    4550 1600
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H1
+U 1 1 6178D339
+P 7150 -300
+F 0 "H1" H 7250 -254 50  0000 L CNN
+F 1 "logo" H 7250 -345 50  0000 L CNN
+F 2 "Rare flowers:TFRAS" H 7150 -300 50  0001 C CNN
+F 3 "~" H 7150 -300 50  0001 C CNN
+	1    7150 -300
+	1    0    0    -1  
+$EndComp
+Text Notes 2900 4700 0    50   ~ 0
+reset requires no extra hardware -\nactually, the pin is a GPIO by default!\nresetting is done thru the UPDI pin.
+Text Notes 650  6750 0    50   ~ 0
+important note: it’s the HC version (3v3), not HCT (5v device)!
 $EndSCHEMATC

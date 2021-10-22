@@ -1,0 +1,13 @@
+### Module positions - created on Friday, October 22, 2021 at 03:03:13 PM ###
+### Printed by Pcbnew version kicad (5.1.9-0-10_14)
+## Unit = mm, Angle = deg.
+## Side : top
+# Ref     Val                  Package                                             PosX       PosY       Rot  Side
+C4        100nF                C_0402_1005Metric                                38.0000   -33.2000   90.0000  top
+J1        BOTTOM               Molex_200528-0170_1x17-1MP_P1.00mm_Horizontal    32.0000   -39.8000    0.0000  top
+J4        TOP                  Molex_200528-0170_1x17-1MP_P1.00mm_Horizontal    32.0000   -24.2000  180.0000  top
+R1        100k                 R_0402_1005Metric                                40.5100   -36.5000  180.0000  top
+R8        RTERM                R_0805_2012Metric_Pad1.20x1.40mm_HandSolder      23.5000   -33.2000    0.0000  top
+TH1       Thermistor_NTC_100K  R_0603_1608Metric                                38.6000   -36.0000  270.0000  top
+U1        ATmega4809-A         TQFP-48_7x7mm_P0.5mm                             32.2000   -32.2000    0.0000  top
+## End

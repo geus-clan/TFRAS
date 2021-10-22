@@ -1,0 +1,22 @@
+### Module positions - created on Friday, October 22, 2021 at 03:03:13 PM ###
+### Printed by Pcbnew version kicad (5.1.9-0-10_14)
+## Unit = mm, Angle = deg.
+## Side : bottom
+# Ref     Val          Package                    PosX       PosY       Rot  Side
+C1        10uF         C_1206_3216Metric       41.4000   -30.7000  180.0000  bottom
+C2        100uF        C_1206_3216Metric       37.6250   -33.7000    0.0000  bottom
+C3        100nF        C_0402_1005Metric       28.9000   -36.5000  270.0000  bottom
+C5        100nF        C_0402_1005Metric       32.5200   -25.9000  180.0000  bottom
+C6        100nF        C_0402_1005Metric       21.5800   -27.6000  180.0000  bottom
+C7        100nF        C_0402_1005Metric       33.7200   -22.3000    0.0000  bottom
+C8        100nF        C_0402_1005Metric       32.7000   -41.2000  180.0000  bottom
+L1        10uH         L_0603_1608Metric       32.5000   -35.1000  180.0000  bottom
+R2        10k          R_0805_2012Metric       41.8125   -25.4000    0.0000  bottom
+R3        13           R_1206_3216Metric       21.3000   -34.0625   90.0000  bottom
+R4        13           R_1206_3216Metric       25.3000   -34.1000   90.0000  bottom
+R7        10k          R_0805_2012Metric       34.5000   -42.8000    0.0000  bottom
+U2        AMS1117-3.3  SOT-223-3_TabPin2       40.3000   -39.5000  270.0000  bottom
+U3        MAX3471      MSOP-8_3x3mm_P0.65mm    23.3125   -29.8750  180.0000  bottom
+U4        74HCT4051BQ  SOT763-1(DHVQFN16)      37.7000   -22.4000  270.0000  bottom
+U5        74HCT4051BQ  SOT763-1(DHVQFN16)      28.7000   -41.5000   90.0000  bottom
+## End

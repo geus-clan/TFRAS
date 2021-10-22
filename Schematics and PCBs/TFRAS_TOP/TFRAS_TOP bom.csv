@@ -1,0 +1,15 @@
+Designator,MPN,Qty,Link
+C1,302010181,1,
+C2,302010183,1,
+"C3, C4, C5, C6, C7, C8",302010004,6,
+L1,303010026,1,
+R1,301010456,1,
+"R2, R7",301010361,2,
+"R3, R4",301010405,2,
+TH1,314110001,1,
+U1,ATMEGA4809-AFR,1,
+U2,AMS1117-3.3	,1,
+U3,MAX3471EUA,1,
+,,,
+"U4, U5",74HC4051BQ,2,https://www.nexperia.com/products/analog-logic-ics/i-o-expansion-logic/analog-switches/74HC4051BQ.html
+"J1, J4",MOLEX 200528-0170,2,https://www.molex.com/molex/products/part-detail/ffc_fpc_connectors/2005280170
