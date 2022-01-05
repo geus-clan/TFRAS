@@ -974,4 +974,14 @@ Text Notes 2900 4700 0    50   ~ 0
 reset requires no extra hardware -\nactually, the pin is a GPIO by default!\nresetting is done thru the UPDI pin.
 Text Notes 650  6750 0    50   ~ 0
 important note: it’s the HC version (3v3), not HCT (5v device)!
+Text Notes 450  -650 0    394  ~ 0
+REPLACE with  MPM3610 
+Wire Notes Line
+	300  2350 3250 2350
+Wire Notes Line
+	3250 2350 3250 -450
+Wire Notes Line
+	3250 -450 300  -450
+Wire Notes Line
+	300  -450 300  2350
 $EndSCHEMATC
