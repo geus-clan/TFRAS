@@ -5,7 +5,7 @@
 
 #define UART_TX 44
 #define UART_RX 45
-#define RS485_EN 2
+#define TX_EN 2
 
 #define S0 33
 #define S1 32
@@ -77,7 +77,7 @@ Serial.begin(9600);
     pinMode(L_, OUTPUT); 
 
 
-  pinMode(RS485_EN, OUTPUT);
+  pinMode(TX_EN, OUTPUT);
 
   pinMode(S0, OUTPUT);
   pinMode(S1, OUTPUT);
@@ -87,8 +87,9 @@ Serial.begin(9600);
   pinMode(S1_, OUTPUT);
   pinMode(S2_, OUTPUT);
   
-  digitalWrite(RS485_EN, HIGH); //just temporary for testing: allow serial transmission any time
+  //digitalWrite(TX_EN, HIGH); //just temporary for testing: allow serial transmission any time
   
+   digitalWrite(TX_EN, LOW); 
 
 }
 
@@ -256,9 +257,43 @@ void printBend(){
 
 
 void loop() {
- readFlex();
- printResults();
+
+if (Serial.available() > 0){
+
+ while (Serial.available() > 0)
+ {
+    int c = Serial.read();
+     digitalWrite(TX_EN, HIGH);
+
+     Serial.println(c);
+     delay(10);
+     digitalWrite(TX_EN, LOW);//rx enable, tx disable
+     delay(10);
+     
+   if (c == 97){
+    
+
+      digitalWrite(TX_EN, HIGH);
+      delay(15);
+
+      //Serial.println("transmitting data...");
+
+     readFlex();
+     printResults();
+     Serial.println();
+     Serial.flush();  //wait for all data to be sent before disabling coms
+     digitalWrite(TX_EN, LOW);//rx enable, tx disable
+
+   }
+
+   //Message coming in
+
+   
+ }
+  
+}
+
  //checkBend();
  //printBend();
- delay(1000);
+ //delay(100);
 }
