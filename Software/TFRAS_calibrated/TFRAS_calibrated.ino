@@ -3,7 +3,7 @@
 //  wait to transmit
 //  read center of flex pcb
 
-#define ADDRESS 99 //"c"
+#define ADDRESS 97 //"a"
 
 #define UART_TX 44
 #define UART_RX 45
@@ -61,8 +61,29 @@
 
 int topFlex[12];     //arrays for storing the cm of readings. e.g. topFlex[6] is between 6 and 7cm
 int bottomFlex[12];
-   int bent[12];
 
+int bottomBent[12]; //arrays for storing how bent the positions are
+int topBent[12];
+
+int topFlat[12] = {}; //calibration points --- what the standard ADC measurements are when they're flat. this should be optimized a lot later. temporary.
+int bottomFlat[12] = {463, 466, 335, 333, 523, 413, 468, 470, 399, 341, 530, 251,};
+                  
+/*
+                    
+A:
+int topFlat[12] = {}; //calibration points --- what the standard ADC measurements are when they're flat. this should be optimized a lot later. temporary.
+int bottomFlat[12] = {463, 466, 335, 333, 523, 413, 468, 470, 399, 341, 530, 251,};
+B:
+int topFlat[12] = {402, 435, 464, 429, 417, 477, 437, 456, 435, 466, 560, 145}; //calibration points --- what the standard ADC measurements are when they're flat. this should be optimized a lot later. temporary.
+int bottomFlat[12] = {775, 464, 421, 450, 413, 449, 397, 432, 413, 454, 358, 336};
+C:
+int topFlat[12] = {456, 371, 409, 443, 415, 458, 407, 462, 411, 476, 557, 140};
+int bottomFlat[12] = {738, 421, 374, 371, 422, 363, 469, 429, 452, 401, 477, 373};
+D:
+int topFlat[12] = {403, 472, 440, 441, 362, 475, 366, 519, 446, 457, 501, 195};
+int bottomFlat[12] = {594, 331, 496, 513, 308, 425, 401, 357, 404, 369, 427, 362};
+                  
+*/
 void setup() {
 Serial.begin(9600);
 
@@ -70,6 +91,14 @@ Serial.begin(9600);
     pinMode(A_TOP, INPUT);
     pinMode(A_BOTTOM, INPUT);
     pinMode(ADC_THERM, INPUT);
+
+    pinMode(A, OUTPUT);
+    pinMode(C, OUTPUT);
+    pinMode(E, OUTPUT);
+    pinMode(G, OUTPUT);
+    pinMode(I, OUTPUT);
+    pinMode(K, OUTPUT); 
+    pinMode(M, OUTPUT); 
 
     pinMode(B_, OUTPUT);
     pinMode(D_, OUTPUT);
@@ -96,20 +125,55 @@ Serial.begin(9600);
 }
 
 void readFlex(){
+  /////Top section
+  digitalWrite(A,HIGH);
+  topFlex[11] = flexT(B) / 2.0; //TEMPORARY WORKAROUND
+  digitalWrite(A,LOW);
+
+  digitalWrite(C,HIGH);
+  topFlex[10] = flexT(B);
+  topFlex[9] = flexT(D);
+  digitalWrite(C,LOW);
+
+  digitalWrite(E,HIGH);
+  topFlex[8] = flexT(D);
+  topFlex[7] = flexT(F);
+  digitalWrite(E,LOW);
+
+  digitalWrite(G,HIGH);
+  topFlex[6] = flexT(F);
+  topFlex[5] = flexT(H);
+  digitalWrite(G,LOW);
+  
+  digitalWrite(I,HIGH);
+  topFlex[4] = flexT(H);
+  topFlex[3] = flexT(J);
+  digitalWrite(I,LOW);
+
+  digitalWrite(K,HIGH);
+  topFlex[2] = flexT(J);
+  topFlex[1] = flexT(L);
+  digitalWrite(K,LOW);
+
+  digitalWrite(M,HIGH);
+  topFlex[0] = flexT(L);
+  digitalWrite(M,LOW);
+
+  /////Bottom section
   digitalWrite(B_,HIGH);
   bottomFlex[0] = flexB(A_);
   bottomFlex[1] = flexB(C_);
   digitalWrite(B_,LOW);
 
   digitalWrite(D_,HIGH);
-  bottomFlex[2] = flexB(C_); //problem
+  bottomFlex[2] = flexB(C_);
   bottomFlex[3] = flexB(E_);
   digitalWrite(D_,LOW);
 
   digitalWrite(F_,HIGH);
   bottomFlex[4] = flexB(E_);
   bottomFlex[5] = flexB(G_);
-  digitalWrite(F_,LOW); //problem
+  digitalWrite(F_,LOW);
 
   digitalWrite(H_,HIGH);
   bottomFlex[6] = flexB(G_);
@@ -131,6 +195,11 @@ void readFlex(){
 int flexB(int a){
   addressMux(a);
   return analogRead(A_BOTTOM);
+}
+
+int flexT(int a){
+  addressMux(a);
+  return analogRead(A_TOP);
 }
 
 
@@ -209,6 +278,11 @@ void addressMux(int a){
 void printResults(){
     
  for(int i=0;i<12;i++){
+    Serial.print(topFlex[i]);
+    Serial.print(", ");
+  }
+  
+ for(int i=0;i<12;i++){
     Serial.print(bottomFlex[i]);
     Serial.print(", ");
   }
@@ -218,48 +292,49 @@ void printResults(){
 
 }
 
-void checkBend(){
-
- for(int i=0;i<12;i++){
-    if(bottomFlex[i] < 200){
-      bent[i] = 1;  //register binary bend in one direction
+int checkBend(int i){
+  int x; //local result
+  
+    if(i < 200){
+      x = 1;  //register binary bend in one direction
     }
-    else if(bottomFlex[i] > 500){
-      bent[i] = 2;  //other direction
+    else if(i < 300){
+      x = 2;  //register binary bend in one direction
+    }
+    else if(i > 500){
+      x = 4;  //other direction
+    }
+    else if(i > 600){
+      x = 5;  //other direction
     }
     else {
-      bent[i]=0;  //no bend
-    }
+      x=3;  //no bend
+    
  }
+ return x;
     
 }
 
-void printBend(){
+int compareFlat(int i){
+  int x; //local result
   /*
-   * this function takes the average of all measurements and returns
-   * each reading's deviation.
-   * it's not so smart --- when the sensor is coiled, the average could
-   * be anybody's guess.
-   * what it should be is each reading compared to the average of a completely
-   * flat sensor.
-   */
-  int total = 0;
-   for(int i=1;i<11;i++){
-    total += bottomFlex[i]; //ignoring the first and last measurements (different for now)
-   }
-   int avg=total/10;
-   Serial.printf("Average: %i. \t",total/12);
-   for(int i=0;i<12;i++){
-    //Serial.printf("[%i] %i \t",i,bottomFlex[i]-avg);
-   }
-   Serial.println();
+    if(topFlat[i] < topFlex){
+      x = 1;  //register binary bend in one direction
+    }
+    else if(i < 300){
+      x = 2;  //register binary bend in one direction
+ }
+ */
+ x = topFlat[i] - topFlex[i];
+ return x;
+    
 }
-
 
 
 
 void loop() {
 
+  
 if (Serial.available() > 0){
 
  while (Serial.available() > 0)
@@ -282,7 +357,30 @@ if (Serial.available() > 0){
       //Serial.println("transmitting data...");
 
      readFlex();
-     printResults();
+     //printResults();
+     //Serial.println();
+    //Serial.print("TOP: : ");
+
+    int sum = 0;/*
+    for(int i=0;i<12;i++){
+      sum += abs(topFlat[i] - topFlex[i]);
+      Serial.print(topFlat[i] - topFlex[i]);
+      Serial.print(",");
+    }
+    */
+   // Serial.print("\t --- sum : ");
+    //Serial.println(sum);
+    
+    //Serial.print("BOTTOM: : ");
+    sum = 0;
+    for(int i=0;i<12;i++){
+      sum += abs(bottomFlat[i] - bottomFlex[i]);
+      Serial.print(bottomFlat[i] - bottomFlex[i]);
+      Serial.print(",");
+    }
+    //Serial.print("\t --- sum : ");
+    //Serial.print(sum);
+     
      Serial.println();
      Serial.flush();  //wait for all data to be sent before disabling coms
      digitalWrite(TX_EN, LOW);//rx enable, tx disable

@@ -59,7 +59,7 @@
 #define G_ 5
 #define E_ 7
 
-int topFlex[12];     //arrays for storing the cm of readings. e.g. topFlex[6] is between 6 and 7cm
+int topFlex[13];     //arrays for storing the cm of readings. e.g. topFlex[6] is between 6 and 7cm
 int bottomFlex[12];
    int bent[12];
 
@@ -96,20 +96,55 @@ Serial.begin(9600);
 }
 
 void readFlex(){
+  /////Top section
+  digitalWrite(A,HIGH);
+  topFlex[0] = flexT(B);
+  digitalWrite(A,LOW);
+
+  digitalWrite(C,HIGH);
+  topFlex[2] = flexT(B);
+  topFlex[3] = flexT(D);
+  digitalWrite(C,LOW);
+
+  digitalWrite(E,HIGH);
+  topFlex[4] = flexT(D);
+  topFlex[5] = flexT(F);
+  digitalWrite(E,LOW);
+
+  digitalWrite(G,HIGH);
+  topFlex[6] = flexT(F);
+  topFlex[7] = flexT(H);
+  digitalWrite(G,LOW);
+  
+  digitalWrite(I,HIGH);
+  topFlex[8] = flexT(H);
+  topFlex[9] = flexT(J);
+  digitalWrite(I,LOW);
+
+  digitalWrite(K,HIGH);
+  topFlex[10] = flexT(J);
+  topFlex[11] = flexT(L);
+  digitalWrite(K,LOW);
+
+  digitalWrite(M,HIGH);
+  topFlex[12] = flexT(L);
+  digitalWrite(M,LOW);
+
+  /////Bottom section
   digitalWrite(B_,HIGH);
   bottomFlex[0] = flexB(A_);
   bottomFlex[1] = flexB(C_);
   digitalWrite(B_,LOW);
 
   digitalWrite(D_,HIGH);
-  bottomFlex[2] = flexB(C_); //problem
+  bottomFlex[2] = flexB(C_);
   bottomFlex[3] = flexB(E_);
   digitalWrite(D_,LOW);
 
   digitalWrite(F_,HIGH);
   bottomFlex[4] = flexB(E_);
   bottomFlex[5] = flexB(G_);
-  digitalWrite(F_,LOW); //problem
+  digitalWrite(F_,LOW);
 
   digitalWrite(H_,HIGH);
   bottomFlex[6] = flexB(G_);
@@ -131,6 +166,11 @@ void readFlex(){
 int flexB(int a){
   addressMux(a);
   return analogRead(A_BOTTOM);
+}
+
+int flexT(int a){
+  addressMux(a);
+  return analogRead(A_TOP);
 }
 
 
@@ -208,11 +248,16 @@ void addressMux(int a){
 
 void printResults(){
     
+ for(int i=0;i<13;i++){
+    Serial.print(topFlex[i]);
+    Serial.print(", ");
+  }
+  /*
  for(int i=0;i<12;i++){
     Serial.print(bottomFlex[i]);
     Serial.print(", ");
   }
-    
+    */
   Serial.println();
 
 
@@ -232,27 +277,6 @@ void checkBend(){
     }
  }
     
-}
-
-void printBend(){
-  /*
-   * this function takes the average of all measurements and returns
-   * each reading's deviation.
-   * it's not so smart --- when the sensor is coiled, the average could
-   * be anybody's guess.
-   * what it should be is each reading compared to the average of a completely
-   * flat sensor.
-   */
-  int total = 0;
-   for(int i=1;i<11;i++){
-    total += bottomFlex[i]; //ignoring the first and last measurements (different for now)
-   }
-   int avg=total/10;
-   Serial.printf("Average: %i. \t",total/12);
-   for(int i=0;i<12;i++){
-    //Serial.printf("[%i] %i \t",i,bottomFlex[i]-avg);
-   }
-   Serial.println();
 }
 
 
