@@ -1,4 +1,4 @@
-#define ADDRESS 98 // 'b'
+#define ADDRESS 97 // 'a'
 
 #define UART_TX 44
 #define UART_RX 45
@@ -68,7 +68,9 @@ int bottomBent[12]; //arrays for storing how bent the positions are
 int topBent[12];
 
 int topFlat[12] = {402, 435, 464, 429, 417, 477, 437, 456, 435, 466, 560, 145};
-int bottomFlat[12] = {775, 464, 421, 450, 413, 449, 397, 432, 413, 454, 358, 336};
+int bottomFlat[12] = {656,477,345,317,543,455,429,500,357,342,531,812};
+
+
 /*
                     
 A:
@@ -128,7 +130,7 @@ Serial.begin(9600);
 void readFlex(){
   /////Top section
   digitalWrite(A,HIGH);
-  topFlex[11] = flexT(B) / 2.0; //TEMPORARY WORKAROUND
+  topFlex[11] = flexT(B); //TEMPORARY WORKAROUND
   digitalWrite(A,LOW);
 
   digitalWrite(C,HIGH);
@@ -188,7 +190,7 @@ void readFlex(){
 
   digitalWrite(L_,HIGH);
   bottomFlex[10] = flexB(K_);
-  bottomFlex[11] = flexB(M_) / 2.0; //TEMPORARY WORKAROUND - last measurement 
+  bottomFlex[11] = flexB(M_); //TEMPORARY WORKAROUND - last measurement 
   digitalWrite(L_,LOW);
 
 }
@@ -335,7 +337,7 @@ int compareFlat(int i){
 
 void loop() {
 
-  
+  /*
 if (Serial.available() > 0){
 
  while (Serial.available() > 0)
@@ -350,38 +352,40 @@ if (Serial.available() > 0){
 //     delay(10);
 //     
    if (c == ADDRESS){
-    
+    */
      readFlex();
 
       digitalWrite(TX_EN, HIGH);
       delay(15);
 
-
+/*
     int sum = 0;
     for(int i=0;i<12;i++){
       Serial.print(topFlat[i] - topFlex[i]);
       Serial.print(",");
     }
-    
+    */
     for(int i=0;i<12;i++){
       Serial.print(bottomFlat[i] - bottomFlex[i]);
-      Serial.print(",");
+      Serial.print("\t");
     }
     
-     readTemp();
+     //readTemp();
      Serial.println();
      Serial.flush();  //wait for all data to be sent before disabling coms
      digitalWrite(TX_EN, LOW);//rx enable, tx disable
 
-   }
+     delay(200);
 
+   }
+/*
 
    
  }
   
 }
 
-}
+}*/
 
 
 void readTemp(void) {

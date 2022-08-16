@@ -1,4 +1,9 @@
-#define ADDRESS 98 // 'b'
+//to do:
+//  address individual boards
+//  wait to transmit
+//  read center of flex pcb
+
+#define ADDRESS 97 //"a"
 
 #define UART_TX 44
 #define UART_RX 45
@@ -67,8 +72,9 @@ int bottomFlex[12];
 int bottomBent[12]; //arrays for storing how bent the positions are
 int topBent[12];
 
-int topFlat[12] = {402, 435, 464, 429, 417, 477, 437, 456, 435, 466, 560, 145};
-int bottomFlat[12] = {775, 464, 421, 450, 413, 449, 397, 432, 413, 454, 358, 336};
+int topFlat[12] = {}; //calibration points --- what the standard ADC measurements are when they're flat. this should be optimized a lot later. temporary.
+int bottomFlat[12] = {463, 466, 335, 333, 523, 413, 468, 470, 399, 341, 530, 251,};
+                  
 /*
                     
 A:
@@ -331,56 +337,60 @@ int compareFlat(int i){
     
 }
 
-
-
-void loop() {
-
+void readAll(){ //takes command character 'Q' from the station and starts serial streams from each board. this has a lot of potential for improvement.
   
-if (Serial.available() > 0){
-
  while (Serial.available() > 0)
  {
     int c = Serial.read();
-//    
-//     digitalWrite(TX_EN, HIGH);
-//
-//     Serial.println(c);
-//     delay(10);
-//     digitalWrite(TX_EN, LOW);//rx enable, tx disable
-//     delay(10);
-//     
-   if (c == ADDRESS){
     
-     readFlex();
+    if (c == 'q'){
+    
 
       digitalWrite(TX_EN, HIGH);
       delay(15);
+            Serial.print("a,");
 
-
-    int sum = 0;
-    for(int i=0;i<12;i++){
-      Serial.print(topFlat[i] - topFlex[i]);
-      Serial.print(",");
-    }
-    
-    for(int i=0;i<12;i++){
-      Serial.print(bottomFlat[i] - bottomFlex[i]);
-      Serial.print(",");
-    }
-    
+     readFlex();
+     
+         for(int i=0;i<12;i++){
+            Serial.print(bottomFlat[i] - bottomFlex[i]);
+            Serial.print(",");
+         }
+            
+     Serial.flush();
      readTemp();
-     Serial.println();
-     Serial.flush();  //wait for all data to be sent before disabling coms
-     digitalWrite(TX_EN, LOW);//rx enable, tx disable
 
-   }
+          Serial.print("*");
+     readBoard('b');
+     delay(250);
+          Serial.print("*");
 
+     readBoard('c');
+     delay(250);
+          Serial.print("*");
+
+     readBoard('d');
+     delay(250);
+          Serial.print("*");
 
    
+   }
+
  }
-  
+      
 }
 
+void readBoard(char x){
+   digitalWrite(TX_EN, HIGH);
+   delay(15);
+   Serial.print(x);
+   Serial.print(",");
+   Serial.flush();
+   digitalWrite(TX_EN, LOW);//rx enable, tx disable
+}
+
+void loop() {
+readAll();
 }
 
 
