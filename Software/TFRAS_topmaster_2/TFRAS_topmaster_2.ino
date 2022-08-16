@@ -71,6 +71,13 @@ char receivedChars[numChars];
 char tempChars[numChars];        // temporary array for use when parsing
 int incomingData[13];
 
+int boardA[13];
+int boardB[25]; //2*12 flex + temp
+int boardC[25];
+int boardD[25];
+
+
+
 boolean newData = false;
 
 int topFlex[12];     //arrays for storing the cm of readings. e.g. topFlex[6] is between 6 and 7cm
@@ -344,7 +351,7 @@ int compareFlat(int i){
     
 }
 
-void readAll(){ //takes command character 'Q' from the station and starts serial streams from each board. this has a lot of potential for improvement.
+void readAll(){ //takes command character 'q' from the station and starts serial streams from each board. this has a lot of potential for improvement.
   
  while (Serial.available() > 0)
  {
@@ -352,33 +359,33 @@ void readAll(){ //takes command character 'Q' from the station and starts serial
     
     if (c == 'q'){
     
-
-      digitalWrite(TX_EN, HIGH);
-      delay(15);
-            Serial.print("a,");
-
-     readFlex();
      
-         for(int i=0;i<12;i++){
-            Serial.print(bottomFlat[i] - bottomFlex[i]);
-            Serial.print(",");
-         }
+     readFlex(); //read and save bottomside flex data on local board
+     
+     for(int i=0;i<12;i++){
+        boardA[i]= (bottomFlat[i] - bottomFlex[i]);
+     }
             
-     Serial.flush();
-     readTemp();
-
-          Serial.print("*");
+     boardA[13]=readTemp();
+     
      readBoard('b');
      delay(250);
-          Serial.print("*");
+     for(int i=0;i<25;i++){
+        boardB[i] = incomingData[i];
+     }
 
      readBoard('c');
      delay(250);
-          Serial.print("*");
+     for(int i=0;i<25;i++){
+        boardC[i] = incomingData[i];
+     }
 
      readBoard('d');
      delay(250);
-          Serial.print("*");
+     for(int i=0;i<25;i++){
+        boardD[i] = incomingData[i];
+     }
+
 
    
    }
@@ -396,12 +403,39 @@ void readBoard(char x){
    digitalWrite(TX_EN, LOW);//rx enable, tx disable
 }
 
+void printAll(){
+  digitalWrite(TX_EN, HIGH);
+   delay(15);
+
+   for(int i=0;i<25;i++){
+    Serial.print(boardA[i]);
+    Serial.print(",");
+   }
+   for(int i=0;i<25;i++){
+    Serial.print(boardB[i]);
+    Serial.print(",");
+   }
+   for(int i=0;i<25;i++){
+    Serial.print(boardC[i]);
+    Serial.print(",");
+   }
+   for(int i=0;i<25;i++){
+    Serial.print(boardD[i]);
+    Serial.print(",");
+   }
+
+   Serial.print("*");
+   Serial.flush();
+   digitalWrite(TX_EN, LOW);//rx enable, tx disable
+}
+
 void loop() {
 readAll();
+printAll();
 }
 
 
-void readTemp(void) {
+int readTemp(void) {
   uint8_t i;
   float average;
   samples = 0;
@@ -426,9 +460,8 @@ void readTemp(void) {
   temperature = 1.0 / temperature;                 // Invert
   temperature -= 273.15;                         // convert absolute temp to C
 
-  Serial.print("$");
-  Serial.print(temperature);
-  Serial.println("#");
+  return (int)(temperature*100); //must divide by 100 to get correct value. using ints because all bend data is int
+
 }
 
 
@@ -486,7 +519,7 @@ void parseData() {      // split the data into its parts
     strtokIndx = strtok(tempChars,",");
     incomingData[0] = atoi(strtokIndx);
 
-    for(int i=1; i<13; i++){
+    for(int i=1; i<26; i++){
       
     strtokIndx = strtok(NULL, ",");
     incomingData[i] = atoi(strtokIndx);

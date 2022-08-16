@@ -1,9 +1,4 @@
-//to do:
-//  address individual boards
-//  wait to transmit
-//  read center of flex pcb
-
-#define ADDRESS 97 //"a"
+#define ADDRESS 98 // 'b'
 
 #define UART_TX 44
 #define UART_RX 45
@@ -66,22 +61,14 @@ int samples = 0;   //array to store the samples
 #define G_ 5
 #define E_ 7
 
-const byte numChars = 128;
-char receivedChars[numChars];
-char tempChars[numChars];        // temporary array for use when parsing
-int incomingData[13];
-
-boolean newData = false;
-
 int topFlex[12];     //arrays for storing the cm of readings. e.g. topFlex[6] is between 6 and 7cm
 int bottomFlex[12];
 
 int bottomBent[12]; //arrays for storing how bent the positions are
 int topBent[12];
 
-int topFlat[12] = {}; //calibration points --- what the standard ADC measurements are when they're flat. this should be optimized a lot later. temporary.
-int bottomFlat[12] = {463, 466, 335, 333, 523, 413, 468, 470, 399, 341, 530, 251,};
-                  
+int topFlat[12] = {402, 435, 464, 429, 417, 477, 437, 456, 435, 466, 560, 145};
+int bottomFlat[12] = {775, 464, 421, 450, 413, 449, 397, 432, 413, 454, 358, 336};
 /*
                     
 A:
@@ -344,64 +331,52 @@ int compareFlat(int i){
     
 }
 
-void readAll(){ //takes command character 'Q' from the station and starts serial streams from each board. this has a lot of potential for improvement.
+
+
+void loop() {
+
   
+if (Serial.available() > 0){
+
  while (Serial.available() > 0)
  {
     int c = Serial.read();
     
-    if (c == 'q'){
+    if (c == ADDRESS){
     
+     readFlex();
 
       digitalWrite(TX_EN, HIGH);
       delay(15);
-            Serial.print("a,");
+      
+    Serial.print('<');
+    for(int i=0;i<12;i++){
+      Serial.print(topFlat[i] - topFlex[i]);
+      Serial.print(",");
+    }
+    
+    for(int i=0;i<12;i++){
+      Serial.print(bottomFlat[i] - bottomFlex[i]);
+      Serial.print(",");
+    }
+    
+     Serial.print(readTemp());
+     Serial.println('>');
+     Serial.flush();  //wait for all data to be sent before disabling coms
+     digitalWrite(TX_EN, LOW);//rx enable, tx disable
 
-     readFlex();
-     
-         for(int i=0;i<12;i++){
-            Serial.print(bottomFlat[i] - bottomFlex[i]);
-            Serial.print(",");
-         }
-            
-     Serial.flush();
-     readTemp();
-
-          Serial.print("*");
-     readBoard('b');
-     delay(250);
-          Serial.print("*");
-
-     readBoard('c');
-     delay(250);
-          Serial.print("*");
-
-     readBoard('d');
-     delay(250);
-          Serial.print("*");
-
-   
    }
 
+
+   
  }
-      
+  
 }
 
-void readBoard(char x){
-   digitalWrite(TX_EN, HIGH);
-   delay(15);
-   Serial.print(x);
-   Serial.print(",");
-   Serial.flush();
-   digitalWrite(TX_EN, LOW);//rx enable, tx disable
-}
-
-void loop() {
-readAll();
 }
 
 
-void readTemp(void) {
+int readTemp(void) {
   uint8_t i;
   float average;
   samples = 0;
@@ -426,70 +401,6 @@ void readTemp(void) {
   temperature = 1.0 / temperature;                 // Invert
   temperature -= 273.15;                         // convert absolute temp to C
 
-  Serial.print("$");
-  Serial.print(temperature);
-  Serial.println("#");
-}
-
-
-void recSerial() {
-    static boolean recvInProgress = false;
-    static byte ndx = 0;
-    char startMarker = '<';
-    char endMarker = '>';
-    char rc;
-    
-
-    while (Serial.available() > 0 && newData == false) {
-        rc = Serial.read();
-
-        if (recvInProgress == true) {
-            if (rc != endMarker) {
-                receivedChars[ndx] = rc;
-                ndx++;
-                if (ndx >= numChars) {
-                    ndx = numChars - 1;
-                }
-            }
-            else {
-                receivedChars[ndx] = '\0'; // terminate the string
-                recvInProgress = false;
-                ndx = 0;
-                newData = true;
-            }
-        }
-
-        else if (rc == startMarker) {
-            recvInProgress = true;
-        }
-    }
-    
-}
-
-
-void readData() {
-    recSerial();
-    
-    if (newData == true) {
-        strcpy(tempChars, receivedChars);
-            // this temporary copy is necessary to protect the original data
-            //   because strtok() used in parseData() replaces the commas with \0
-        parseData();
-        newData = false;
-    }
-}
-
-void parseData() {      // split the data into its parts
-        
-    char * strtokIndx; // this is used by strtok() as an index
-    
-    strtokIndx = strtok(tempChars,",");
-    incomingData[0] = atoi(strtokIndx);
-
-    for(int i=1; i<13; i++){
-      
-    strtokIndx = strtok(NULL, ",");
-    incomingData[i] = atoi(strtokIndx);
-    }
+  return (int)temperature*100; //must divide by 100 to get correct value. using ints because all bend data is int
 
 }
