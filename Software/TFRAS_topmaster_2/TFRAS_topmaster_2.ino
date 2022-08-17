@@ -88,6 +88,8 @@ int topBent[12];
 
 int topFlat[12] = {}; //calibration points --- what the standard ADC measurements are when they're flat. this should be optimized a lot later. temporary.
 int bottomFlat[12] = {463, 466, 335, 333, 523, 413, 468, 470, 399, 341, 530, 251,};
+
+unsigned long timeout = 0; 
                   
 /*
                     
@@ -297,15 +299,15 @@ void addressMux(int a){
 }
 
 void printResults(){
-    
+    /*
  for(int i=0;i<12;i++){
     Serial.print(topFlex[i]);
     Serial.print(", ");
-  }
+  }*/
   
  for(int i=0;i<12;i++){
     Serial.print(bottomFlex[i]);
-    Serial.print(", ");
+    Serial.print(",");
   }
     
   Serial.println();
@@ -363,35 +365,44 @@ void readAll(){ //takes command character 'q' from the station and starts serial
      readFlex(); //read and save bottomside flex data on local board
      
      for(int i=0;i<12;i++){
-        boardA[i]= (bottomFlat[i] - bottomFlex[i]);
+        boardA[i]= bottomFlex[i];
+        //boardA[i] = 3;
      }
             
      boardA[13]=readTemp();
+
      
      readBoard('b');
-     delay(250);
+     recSerial();
+     readData();
+     
      for(int i=0;i<25;i++){
         boardB[i] = incomingData[i];
+        incomingData[i] = 0; //avoid writing duplicate data if it's not updated
      }
-
+      
      readBoard('c');
-     delay(250);
+     recSerial();
+     readData();
      for(int i=0;i<25;i++){
         boardC[i] = incomingData[i];
      }
+     
+     /*
 
      readBoard('d');
      delay(250);
      for(int i=0;i<25;i++){
         boardD[i] = incomingData[i];
      }
+*/
 
+         printAll();
 
-   
    }
 
  }
-      
+
 }
 
 void readBoard(char x){
@@ -406,32 +417,50 @@ void readBoard(char x){
 void printAll(){
   digitalWrite(TX_EN, HIGH);
    delay(15);
+   
+   Serial.println();
+   Serial.println();
+   Serial.println();
+   
 
-   for(int i=0;i<25;i++){
+    Serial.print("BOARD A:");
+
+    
+    printResults();
+    
+   for(int i=0;i<13;i++){
     Serial.print(boardA[i]);
     Serial.print(",");
    }
+   Serial.println();
+       Serial.print("B:");
+
    for(int i=0;i<25;i++){
     Serial.print(boardB[i]);
     Serial.print(",");
    }
+   Serial.println();
+       Serial.print("C:");
+
    for(int i=0;i<25;i++){
     Serial.print(boardC[i]);
     Serial.print(",");
    }
+      Serial.println();
+/*
    for(int i=0;i<25;i++){
     Serial.print(boardD[i]);
     Serial.print(",");
    }
+      Serial.println();
+*/
 
-   Serial.print("*");
    Serial.flush();
    digitalWrite(TX_EN, LOW);//rx enable, tx disable
 }
 
 void loop() {
 readAll();
-printAll();
 }
 
 
@@ -472,10 +501,19 @@ void recSerial() {
     char endMarker = '>';
     char rc;
     
-
-    while (Serial.available() > 0 && newData == false) {
+    timeout = millis()-timeout;
+    while (newData == false ) {
+        if(millis()-timeout > 1000){
+          break;
+        }
+      while (Serial.available() > 0){
+        if(millis()-timeout > 1000){
+          break;
+        }
+        
         rc = Serial.read();
 
+        
         if (recvInProgress == true) {
             if (rc != endMarker) {
                 receivedChars[ndx] = rc;
@@ -496,14 +534,15 @@ void recSerial() {
             recvInProgress = true;
         }
     }
+    }
     
 }
 
 
 void readData() {
-    recSerial();
-    
+
     if (newData == true) {
+      
         strcpy(tempChars, receivedChars);
             // this temporary copy is necessary to protect the original data
             //   because strtok() used in parseData() replaces the commas with \0
