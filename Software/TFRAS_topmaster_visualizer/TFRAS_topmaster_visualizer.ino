@@ -71,8 +71,6 @@ char receivedChars[numChars];
 char tempChars[numChars];        // temporary array for use when parsing
 int incomingData[26];
 
-int savedData[26];
-
 int boardA[14];
 int boardB[25]; //2*12 flex + temp
 int boardC[25];
@@ -333,16 +331,16 @@ void readAll(){ //takes command character 'q' from the station and starts serial
      readData();
     
      for(int i=0;i<25;i++){
-        boardB[i] = savedData[i];
-        savedData[i] = 0; //avoid writing duplicate data if it's not updated
+        boardB[i] = incomingData[i];
+        incomingData[i] = 0; //avoid writing duplicate data if it's not updated
      }
      
      readBoard('c');
      recSerial();
      readData();
      for(int i=0;i<25;i++){
-        boardC[i] = savedData[i];
-        savedData[i] = 0;
+        boardC[i] = incomingData[i];
+        incomingData[i] = 0;
 
      }
      
@@ -420,14 +418,14 @@ void printAll_notemp(){
    //Serial.println();
    // Serial.print("B:");
 
-   for(int i=0;i<25;i++){
+   for(int i=0;i<24;i++){
     Serial.print(boardB[i]);
     Serial.print(",");
    }
    //Serial.println();
-   //    Serial.print("C:");
+   //Serial.print("C:");
 
-   for(int i=0;i<25;i++){
+   for(int i=0;i<24;i++){
     Serial.print(boardC[i]);
     Serial.print(",");
    }
@@ -537,17 +535,15 @@ void readData() {
           
           strtokIndx = strtok(tempChars,",");
           incomingData[0] = atoi(strtokIndx);
+         
+   
       
           for(int i=1; i<26; i++){
             
           strtokIndx = strtok(NULL, ",");
           incomingData[i] = atoi(strtokIndx);
           }
-    
-        newData = false;
-    }
-    
-    for(int i=1; i<26; i++){
-            savedData[i] = incomingData[i];
+
           }
+        newData = false;
 }

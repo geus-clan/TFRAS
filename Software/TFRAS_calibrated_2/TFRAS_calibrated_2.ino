@@ -8,7 +8,7 @@
  */
 
 
-#define ADDRESS 99
+#define ADDRESS 98
 
 /*
  * 97   a
@@ -418,7 +418,7 @@ if (Serial.available() > 0){
 
       digitalWrite(TX_EN, HIGH);
       delay(15);
-        Serial.print('<');
+        Serial.print("<,");
     for(int i=0;i<12;i++){
       //Serial.print(topFlat[i] - topFlex[i]);
       Serial.print(topFlex[i]);
