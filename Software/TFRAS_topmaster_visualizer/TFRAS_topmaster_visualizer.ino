@@ -1,22 +1,9 @@
-/*
- * to do:
- * 
- * boards all return raw ADC
- * top boards compares against calibration table
- * this way the whole string can be calibrated once
- * 
- */
+//to do:
+//  address individual boards
+//  wait to transmit
+//  read center of flex pcb
 
-
-#define ADDRESS 98
-
-/*
- * 97   a
- * 98   b
- * 99   c
- * 100  d
- * 
- */
+#define ADDRESS 97 //"a"
 
 #define UART_TX 44
 #define UART_RX 45
@@ -79,83 +66,48 @@ int samples = 0;   //array to store the samples
 #define G_ 5
 #define E_ 7
 
+const byte numChars = 128;
+char receivedChars[numChars];
+char tempChars[numChars];        // temporary array for use when parsing
+int incomingData[26];
+
+int boardA[14];
+int boardB[25]; //2*12 flex + temp
+int boardC[25];
+int boardD[25];
+
+
+
+boolean newData = false;
+
 int topFlex[12];     //arrays for storing the cm of readings. e.g. topFlex[6] is between 6 and 7cm
 int bottomFlex[12];
 
-int topFlat[12] = {434,443,462,432,429,464,433,456,389,501,546,157};    //arrays for calibration at flat orientation
-int bottomFlat[12] = {679,359,507,230,619,444,439,381,470,440,406,283};
-
-int bottomBent[12]; //arrays for storing how bent the positions are in relation to flat orientation
+int bottomBent[12]; //arrays for storing how bent the positions are
 int topBent[12];
 
+int topFlat[12] = {}; //calibration points --- what the standard ADC measurements are when they're flat. this should be optimized a lot later. temporary.
+int bottomFlat[12] = {3231,465,384,412,441,421,447,459,418,434,452,281};
+
+unsigned long timeout = 0; 
+                  
 /*
                     
 A:
 int topFlat[12] = {}; //calibration points --- what the standard ADC measurements are when they're flat. this should be optimized a lot later. temporary.
 int bottomFlat[12] = {463, 466, 335, 333, 523, 413, 468, 470, 399, 341, 530, 251,};
-
-B:int topFlat[12] = {434,443,462,432,429,464,433,456,389,501,546,157};    //arrays for calibration at flat orientation
-int bottomFlat[12] = {679,359,507,230,619,444,439,381,470,440,406,283};
+B:
+int topFlat[12] = {402, 435, 464, 429, 417, 477, 437, 456, 435, 466, 560, 145}; //calibration points --- what the standard ADC measurements are when they're flat. this should be optimized a lot later. temporary.
+int bottomFlat[12] = {775, 464, 421, 450, 413, 449, 397, 432, 413, 454, 358, 336};
 C:
-int topFlat[12] = {299,500,414,433,456,374,432,362,326,458,312,259};    //arrays for calibration at flat orientation
-int bottomFlat[12] = {664,407,444,418,436,462,392,375,415,416,409,358};
+int topFlat[12] = {456, 371, 409, 443, 415, 458, 407, 462, 411, 476, 557, 140};
+int bottomFlat[12] = {738, 421, 374, 371, 422, 363, 469, 429, 452, 401, 477, 373};
 D:
 int topFlat[12] = {403, 472, 440, 441, 362, 475, 366, 519, 446, 457, 501, 195};
 int bottomFlat[12] = {594, 331, 496, 513, 308, 425, 401, 357, 404, 369, 427, 362};
                   
 */
-
-void setCalibration(int adr){
-  switch(adr){
-    case 97: //'a'
-     int a[24] = {0,0,0,0,0,0,0,0,0,0,0,0,578,378,450,342,529,444,453,507,377,384,498,260};
-     for (int i=0;i<12;i++){
-      topFlat[i] = a[i];
-     }
-     for (int i=12;i<24;i++){
-      bottomFlat[i] = a[i];
-     }
-     
-     
-    break;
-    case 98: //'b'
-     int b[24] = {5,-37,-44,8,1,-20,-23,0,-32,16,-4,-9,76,-10,-50,-43,-30,-74,31,55,-17,-19,62,92};
-     for (int i=0;i<12;i++){
-      topFlat[i] = b[i];
-     }
-     for (int i=12;i<24;i++){
-      bottomFlat[i] = b[i];
-     }
-    
-    break;
-    case 99: //'c'
-     int c[24] = {299,500,414,433,456,374,432,362,326,458,312,259,664,407,444,418,436,462,392,375,415,416,409,358};
-     for (int i=0;i<12;i++){
-      topFlat[i] = c[i];
-     }
-     for (int i=12;i<24;i++){
-      bottomFlat[i] = c[i];
-     }
-    break;
-    
-    case 100: //'d'
-     int d[24] = {299,500,414,433,456,374,432,362,326,458,312,259,664,407,444,418,436,462,392,375,415,416,409,358};
-     for (int i=0;i<12;i++){
-      topFlat[i] = d[i];
-     }
-     for (int i=12;i<24;i++){
-      bottomFlat[i] = d[i];
-     }
-    break;
-  
-  }
-}
-
 void setup() {
-
-  //setCalibration(99);
-
-  
 Serial.begin(9600);
 
 
@@ -347,110 +299,156 @@ void addressMux(int a){
 }
 
 void printResults(){
-    
+    /*
  for(int i=0;i<12;i++){
     Serial.print(topFlex[i]);
     Serial.print(", ");
-  }
+  }*/
   
  for(int i=0;i<12;i++){
     Serial.print(bottomFlex[i]);
-    Serial.print(", ");
+    Serial.print(",");
   }
-    
-  Serial.println();
-
-
 }
 
-int checkBend(int i){
-  int x; //local result
+
+void readAll(){ //takes command character 'q' from the station and starts serial streams from each board. this has a lot of potential for improvement.
   
-    if(i < 200){
-      x = 1;  //register binary bend in one direction
-    }
-    else if(i < 300){
-      x = 2;  //register binary bend in one direction
-    }
-    else if(i > 500){
-      x = 4;  //other direction
-    }
-    else if(i > 600){
-      x = 5;  //other direction
-    }
-    else {
-      x=3;  //no bend
-    
- }
- return x;
-    
-}
-
-int compareFlat(int i){
-  int x; //local result
-  /*
-    if(topFlat[i] < topFlex){
-      x = 1;  //register binary bend in one direction
-    }
-    else if(i < 300){
-      x = 2;  //register binary bend in one direction
- }
- */
- x = topFlat[i] - topFlex[i];
- return x;
-    
-}
-
-
-
-void loop() {
-
-  
-if (Serial.available() > 0){
-
  while (Serial.available() > 0)
  {
     int c = Serial.read();
     
-    if (c == ADDRESS){
+    if (c == 'q'){
     
      readFlex();
-
-      digitalWrite(TX_EN, HIGH);
-      delay(15);
-        Serial.print("<,");
-    for(int i=0;i<12;i++){
-      //Serial.print(topFlat[i] - topFlex[i]);
-      Serial.print(topFlex[i]);
-
-      Serial.print(",");
-    }
-
-    for(int i=0;i<12;i++){
-      //Serial.print(bottomFlat[i] - bottomFlex[i]);
-      
-      Serial.print(bottomFlex[i]);
-
-      Serial.print(",");
-    }
+     for(int i=0;i<13;i++){
+        boardA[i] = bottomFlex[i];
+     }
+     
+     readBoard('b');
+     
+     recSerial();     
+     readData();
     
-     Serial.print((int)readTemp());
-     Serial.println('>');
-     Serial.flush();  //wait for all data to be sent before disabling coms
-     digitalWrite(TX_EN, LOW);//rx enable, tx disable
+     for(int i=0;i<25;i++){
+        boardB[i] = incomingData[i];
+        incomingData[i] = 0; //avoid writing duplicate data if it's not updated
+     }
+     
+     readBoard('c');
+     recSerial();
+     readData();
+     for(int i=0;i<25;i++){
+        boardC[i] = incomingData[i];
+        incomingData[i] = 0;
+
+     }
+     
+  
+   
+         printAll_notemp();
 
    }
+  }
 
+}
+
+void readBoard(char x){
+   digitalWrite(TX_EN, HIGH);
+   delay(15);
+   Serial.print(x);
+   Serial.flush();
+   digitalWrite(TX_EN, LOW);//rx enable, tx disable
+}
+
+void printAll(){
+  
+  digitalWrite(TX_EN, HIGH);
+   delay(15);
+   
+   Serial.println();
+   Serial.println();
+   Serial.println();
+   
+
+   //Serial.print("BOARD A:");
+
+    
+    readFlex();
+    printResults();
 
    
- }
+   //Serial.println();
+   // Serial.print("B:");
+
+   for(int i=0;i<24;i++){
+    Serial.print(boardB[i]);
+    Serial.print(",");
+   }
+
+   for(int i=0;i<24;i++){
+    Serial.print(boardC[i]);
+    Serial.print(",");
+   }
+      Serial.println();
+
+   Serial.flush();
+   digitalWrite(TX_EN, LOW);//rx enable, tx disable
+}
+
+void printAll_notemp(){
   
+  digitalWrite(TX_EN, HIGH);
+   delay(15);
+   
+   Serial.println();
+   Serial.println();
+   Serial.println();
+
+   
+
+   Serial.print("#"); //start character
+
+    
+    readFlex();
+    printResults();
+
+   
+   
+   //Serial.println();
+   // Serial.print("B:");
+
+   for(int i=0;i<24;i++){
+    Serial.print(boardB[i]);
+    Serial.print(",");
+   }
+   //Serial.println();
+   //Serial.print("C:");
+
+   for(int i=0;i<24;i++){
+    Serial.print(boardC[i]);
+    Serial.print(",");
+   }
+      Serial.println();
+/*
+   for(int i=0;i<25;i++){
+    Serial.print(boardD[i]);
+    Serial.print(",");
+   }
+      Serial.println();
+*/
+
+   Serial.flush();
+   digitalWrite(TX_EN, LOW);//rx enable, tx disable
 }
 
+void loop() {
+readAll();
+
 }
 
 
-float readTemp(void) {
+int readTemp(void) {
   uint8_t i;
   float average;
   samples = 0;
@@ -475,6 +473,77 @@ float readTemp(void) {
   temperature = 1.0 / temperature;                 // Invert
   temperature -= 273.15;                         // convert absolute temp to C
 
-  return temperature*100.0; //must divide by 100 to get correct value. using ints because all bend data is int
+  return (int)(temperature*100.0); //must divide by 100 to get correct value. using ints because all bend data is int
 
+}
+
+
+void recSerial() {
+    static boolean recvInProgress = false;
+    static byte ndx = 0;
+    char startMarker = '<';
+    char endMarker = '>';
+    char rc;
+    
+
+    timeout = millis();
+    while (newData == false ) {
+        if(millis()-timeout > 1000){
+          break;
+        }
+      while (Serial.available() > 0){
+        if(millis()-timeout > 1000){
+          break;
+        }
+        rc = Serial.read();
+
+        
+        if (recvInProgress == true) {
+            if (rc != endMarker) {
+                receivedChars[ndx] = rc;
+                ndx++;
+                if (ndx >= numChars) {
+                    ndx = numChars - 1;
+                }
+            }
+            else {
+                receivedChars[ndx] = '\0'; // terminate the string
+                recvInProgress = false;
+                ndx = 0;
+                newData = true;
+            }
+        }
+
+        else if (rc == startMarker) {
+            recvInProgress = true;
+        }
+    }
+    }
+    
+}
+
+
+void readData() {
+
+    if (newData == true) {
+      
+          strcpy(tempChars, receivedChars);
+            // this temporary copy is necessary to protect the original data
+            //   because strtok() replaces the commas with \0
+        
+          char * strtokIndx; // this is used by strtok() as an index
+          
+          strtokIndx = strtok(tempChars,",");
+          incomingData[0] = atoi(strtokIndx);
+         
+   
+      
+          for(int i=1; i<26; i++){
+            
+          strtokIndx = strtok(NULL, ",");
+          incomingData[i] = atoi(strtokIndx);
+          }
+
+          }
+        newData = false;
 }
