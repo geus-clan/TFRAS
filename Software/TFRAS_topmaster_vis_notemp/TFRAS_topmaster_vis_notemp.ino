@@ -86,10 +86,9 @@ int bottomFlex[12];
 int bottomBent[12]; //arrays for storing how bent the positions are
 int topBent[12];
 
-int flatA[12] = {3231,465,384,412,441,421,447,459,418,434,452,281};
+int flatA[12] = {565,349,452,361,502,436,436,456,418,404,481,237};
    
-int flatB[24] = {434,443,462,432,429,464,433,456,389,501,546,157,679,359,507,230,619,444,439,381,470,440,406,283};    //arrays for calibration at flat orientation
-
+int flatB[24] = {472,416,458,441,442,445,401,503,452,451,569,147,706,382,467,468,417,479,404,390,470,394,461,295};    //arrays for calibration at flat orientation
 int flatC[24] = {299,500,414,433,456,374,432,362,326,458,312,259,664,407,444,418,436,462,392,375,415,416,409,358};    //arrays for calibration at flat orientation
 
 unsigned long timeout = 0; 
@@ -349,48 +348,6 @@ void readBoard(char x){
    digitalWrite(TX_EN, LOW);//rx enable, tx disable
 }
 
-void printAll(){
-  
-  digitalWrite(TX_EN, HIGH);
-   delay(15);
-   
-   Serial.println();
-   Serial.println();
-   Serial.println();
-   
-
-   //Serial.print("BOARD A:");
-
-    
-    readFlex();
-    
-    for(int i=0;i<12;i++){
-      Serial.print(bottomFlex[i]-flatA[i]);
-      Serial.print(",");
-    }
-
-   
-   Serial.println();
-   Serial.print("B:");
-
-   for(int i=0;i<24;i++){
-    Serial.print(boardB[i]-flatB[i]);
-    Serial.print(",");
-   }
-
-   Serial.println();
-   Serial.print("C:");
-
-   for(int i=0;i<24;i++){
-    Serial.print(boardC[i]-flatC[i]);
-    Serial.print(",");
-   }
-      Serial.println();
-
-   Serial.flush();
-   digitalWrite(TX_EN, LOW);//rx enable, tx disable
-}
-
 void printAll_notemp(){
   
   digitalWrite(TX_EN, HIGH);
@@ -402,25 +359,22 @@ void printAll_notemp(){
 
     
     readFlex();
-    printResults();
-
+ 
+    for(int i=0;i<12;i++){
+      Serial.print(bottomFlex[i]-flatA[i]);
+      Serial.print(",");
+    }
    
-   
-   //Serial.println();
-   // Serial.print("B:");
-
    for(int i=0;i<24;i++){
-    Serial.print(boardB[i]);
+    Serial.print(boardB[i]-flatB[i]);
     Serial.print(",");
    }
-   //Serial.println();
-   //Serial.print("C:");
 
    for(int i=0;i<24;i++){
-    Serial.print(boardC[i]);
+    Serial.print(boardC[i]-flatC[i]);
     Serial.print(",");
    }
-      Serial.println();
+   Serial.println();
 /*
    for(int i=0;i<25;i++){
     Serial.print(boardD[i]);
