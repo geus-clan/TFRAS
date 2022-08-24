@@ -1,8 +1,3 @@
-//to do:
-//  address individual boards
-//  wait to transmit
-//  read center of flex pcb
-
 #define ADDRESS 97 //"a"
 
 #define UART_TX 44
@@ -75,7 +70,8 @@ int boardA[14];
 int boardB[25]; //2*12 flex + temp
 int boardC[25];
 int boardD[25];
-
+int boardE[25];
+int boardF[25];
 
 
 boolean newData = false;
@@ -330,11 +326,38 @@ void readAll(){ //takes command character 'q' from the station and starts serial
         incomingData[i] = 0;
 
      }
+
      
-  
+       readBoard('d');
+     recSerial();
+     readData();
+     for(int i=0;i<25;i++){
+        boardD[i] = incomingData[i];
+        incomingData[i] = 0;
+
+
+     }     readBoard('e');
+     recSerial();
+     readData();
+     for(int i=0;i<25;i++){
+        boardE[i] = incomingData[i];
+        incomingData[i] = 0;
+
+
+     }     readBoard('f');
+     recSerial();
+     readData();
+     for(int i=0;i<25;i++){
+        boardF[i] = incomingData[i];
+        incomingData[i] = 0;
+
+     }
    
          printAll_notemp();
 
+   }
+   else if (c == 'x'){
+    printAllTemp();
    }
   }
 
@@ -361,28 +384,72 @@ void printAll_notemp(){
     readFlex();
  
     for(int i=0;i<12;i++){
-      Serial.print(bottomFlex[i]-flatA[i]);
+      Serial.print(bottomFlex[i]);
       Serial.print(",");
     }
    
    for(int i=0;i<24;i++){
-    Serial.print(boardB[i]-flatB[i]);
+    Serial.print(boardB[i]);
     Serial.print(",");
    }
 
    for(int i=0;i<24;i++){
-    Serial.print(boardC[i]-flatC[i]);
+    Serial.print(boardC[i]);
     Serial.print(",");
    }
    Serial.println();
-/*
-   for(int i=0;i<25;i++){
+   
+   for(int i=0;i<24;i++){
     Serial.print(boardD[i]);
     Serial.print(",");
    }
-      Serial.println();
-*/
+   Serial.println();
+   
+   for(int i=0;i<24;i++){
+    Serial.print(boardE[i]);
+    Serial.print(",");
+   }
+   Serial.println();
+   
+   for(int i=0;i<24;i++){
+    Serial.print(boardF[i]);
+    Serial.print(",");
+   }
+   Serial.println();
+   
+   Serial.flush();
+   digitalWrite(TX_EN, LOW);//rx enable, tx disable
+}
 
+void printAllTemp(){
+  
+  digitalWrite(TX_EN, HIGH);
+   delay(15);
+   
+   Serial.println();
+   Serial.print("\n");
+   Serial.print("#"); //start character
+
+    
+    readFlex();
+ 
+    
+      Serial.print(readTemp());
+      Serial.print(",");
+
+    Serial.print(boardB[24]);
+    Serial.print(",");
+    Serial.print(boardC[24]);
+    Serial.print(",");
+    Serial.print(boardD[24]);
+    Serial.print(",");
+    Serial.print(boardE[24]);
+    Serial.print(",");
+    Serial.print(boardF[24]);
+    Serial.print(",");
+   
+   Serial.println();
+   
    Serial.flush();
    digitalWrite(TX_EN, LOW);//rx enable, tx disable
 }
