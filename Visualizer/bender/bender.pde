@@ -4,8 +4,8 @@ Serial myPort;  // Create object from Serial class
 String rawSerial = "...";    // Data received from the serial port
 
 int sensorVal = 0;
-int[] numbers = new int[60]; //60
-int[] cal = new int[60];
+int[] numbers = new int[61]; //60
+int[] cal = new int[61];
 static int circleSize = 10;
 
 int calibrated = 0;

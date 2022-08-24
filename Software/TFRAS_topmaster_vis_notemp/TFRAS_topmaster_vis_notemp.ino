@@ -357,6 +357,58 @@ void readAll(){ //takes command character 'q' from the station and starts serial
 
    }
    else if (c == 'x'){
+    
+    
+     readFlex();
+     for(int i=0;i<13;i++){
+        boardA[i] = bottomFlex[i];
+     }
+     
+     readBoard('b');
+     
+     recSerial();     
+     readData();
+    
+     for(int i=0;i<25;i++){
+        boardB[i] = incomingData[i];
+        incomingData[i] = 0; //avoid writing duplicate data if it's not updated
+     }
+     
+     readBoard('c');
+     recSerial();
+     readData();
+     for(int i=0;i<25;i++){
+        boardC[i] = incomingData[i];
+        incomingData[i] = 0;
+
+     }
+
+     
+       readBoard('d');
+     recSerial();
+     readData();
+     for(int i=0;i<25;i++){
+        boardD[i] = incomingData[i];
+        incomingData[i] = 0;
+
+
+     }     readBoard('e');
+     recSerial();
+     readData();
+     for(int i=0;i<25;i++){
+        boardE[i] = incomingData[i];
+        incomingData[i] = 0;
+
+
+     }     readBoard('f');
+     recSerial();
+     readData();
+     for(int i=0;i<25;i++){
+        boardF[i] = incomingData[i];
+        incomingData[i] = 0;
+
+     }
+   
     printAllTemp();
    }
   }
@@ -428,13 +480,9 @@ void printAllTemp(){
    
    Serial.println();
    Serial.print("\n");
-   Serial.print("#"); //start character
-
+   Serial.print("#"); //start character 
     
-    readFlex();
- 
-    
-      Serial.print(readTemp());
+      Serial.print((int)readTemp());
       Serial.print(",");
 
     Serial.print(boardB[24]);
